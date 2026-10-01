@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login Elegante</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Animações e gradientes personalizados */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.08); }
+        }
+
+        .ambient-glow-green {
+            animation: pulseGlow 8s infinite ease-in-out;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
+        }
+
+        .ambient-glow-yellow {
+            animation: pulseGlow 10s infinite ease-in-out 2s;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+        }
+
+        /* Animação do checkmark de sucesso */
+        @keyframes strokeCheck {
+            100% { stroke-dashoffset: 0; }
+        }
+
+        .animate-check {
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: strokeCheck 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards 0.2s;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen flex items-center justify-center p-4 relative overflow-x-hidden">
+
+    <!-- Luzes de fundo decorativas (Verde e Amarelo) -->
+    <div class="absolute -top-24 -left-24 w-96 h-96 ambient-glow-green rounded-full pointer-events-none"></div>
+    <div class="absolute -bottom-24 -right-24 w-96 h-96 ambient-glow-yellow rounded-full pointer-events-none"></div>
+
+    <!-- Container Principal do Card -->
+    <div class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-emerald-100/60 p-8 sm:p-10 transition-all duration-300">
+        
+        <!-- Detalhe superior em gradiente verde e amarelo -->
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-1.5 bg-gradient-to-r from-amber-400 via-emerald-500 to-green-600 rounded-b-full"></div>
+
+        <!-- Cabeçalho -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 mb-4 shadow-sm border border-emerald-100 relative">
+                <!-- Ícone de Chave/Escudo -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                <!-- Ponto amarelo de destaque -->
+                <span class="absolute top-1.5 right-1.5 w-3 h-3 bg-amber-400 border-2 border-white rounded-full"></span>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Acesse sua Conta</h1>
+            <p class="text-sm text-gray-500 mt-1">Informe suas credenciais para continuar</p>
+        </div>
+
+        <!-- Formulário -->
+        <form id="loginForm" class="space-y-5" novalidate>
+            
+            <!-- Campo de E-mail -->
+            <div>
+                <label for="email" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                    E-mail
+                </label>
+                <div class="relative">
+                    <input type="email" id="email" name="email" 
+                        class="w-full pl-11 pr-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 outline-none transition-all duration-200 text-gray-800 text-sm placeholder-gray-400"
+                        placeholder="seu.nome@exemplo.com">
+                    
+                    <!-- Ícone de Envelope -->
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                        </svg>
+                    </div>
+                </div>
+                <p id="emailError" class="text-amber-600 text-xs mt-1.5 font-medium hidden flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                    Insira um e-mail válido.
+                </p>
+            </div>
+
+            <!-- Campo de Senha -->
+            <div>
+                <label for="password" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                    Senha
+                </label>
+                <div class="relative">
+                    <input type="password" id="password" name="password" 
+                        class="w-full pl-11 pr-11 py-3 bg-gray-50/50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 outline-none transition-all duration-200 text-gray-800 text-sm placeholder-gray-400"
+                        placeholder="••••••••">
+                    
+                    <!-- Ícone de Cadeado -->
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+
+                    <!-- Botão Mostrar/Ocultar Senha -->
+                    <button type="button" id="togglePasswordBtn" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-emerald-600 focus:outline-none transition-colors" title="Mostrar/Ocultar Senha">
+                        <!-- Ícone Olho Aberto -->
+                        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        <!-- Ícone Olho Fechado (Escondido por padrão) -->
+                        <svg id="eyeOffIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858-5.908a8.962 8.962 0 012.122-.363c4.478 0 8.268 2.943 9.542 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21f-18-18" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Indicador de Força da Senha -->
+                <div class="mt-2 hidden" id="strengthContainer">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[11px] font-medium text-gray-500">Força da senha:</span>
+                        <span id="strengthText" class="text-[11px] font-semibold text-amber-500">Fraca</span>
+                    </div>
+                    <div class="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden flex gap-1">
+                        <div id="bar1" class="h-full w-1/3 bg-gray-200 transition-all duration-300"></div>
+                        <div id="bar2" class="h-full w-1/3 bg-gray-200 transition-all duration-300"></div>
+                        <div id="bar3" class="h-full w-1/3 bg-gray-200 transition-all duration-300"></div>
+                    </div>
+                </div>
+
+                <p id="passwordError" class="text-amber-600 text-xs mt-1.5 font-medium hidden flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                    A senha precisa de pelo menos 6 caracteres.
+                </p>
+            </div>
+
+            <!-- Opções extras: Lembrar e Esqueci a Senha -->
+            <div class="flex items-center justify-between text-xs py-1">
+                <label class="flex items-center cursor-pointer select-none group">
+                    <input type="checkbox" class="w-4 h-4 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500 accent-emerald-600 cursor-pointer">
+                    <span class="ml-2 text-gray-600 group-hover:text-gray-900 transition-colors">Lembrar de mim</span>
+                </label>
+                <a href="#" class="font-semibold text-emerald-600 hover:text-amber-500 transition-colors">Esqueceu a senha?</a>
+            </div>
+
+            <!-- Botão Entrar -->
+            <button type="submit" id="submitBtn" 
+                class="w-full py-3.5 px-4 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 hover:from-emerald-600 hover:to-green-700 active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2 group">
+                <span id="btnText">Entrar no Sistema</span>
+                <!-- Ícone de Seta -->
+                <svg id="btnIcon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+                <!-- Spinner de Carregamento (Oculto) -->
+                <svg id="btnSpinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </button>
+        </form>
+
+        <!-- Cartão de Sucesso (Exibido após o login ser bem-sucedido) -->
+        <div id="successCard" class="hidden text-center py-6 animate-fade-in">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-emerald-200 shadow-inner">
+                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path class="animate-check" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-1">Acesso Autorizado!</h3>
+            <p class="text-xs text-gray-500 mb-6">Redirecionando para o seu painel de controle...</p>
+            <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-amber-400 to-emerald-500 h-full w-full animate-pulse"></div>
+            </div>
+        </div>
+
+        <!-- Rodapé do Card -->
+        <div id="cardFooter" class="mt-8 text-center text-xs text-gray-500 border-t border-gray-100 pt-6">
+            Ainda não tem uma conta? 
+            <a href="#" class="font-semibold text-amber-500 hover:text-emerald-600 transition-colors ml-1">Criar conta grátis</a>
+        </div>
+    </div>
+
+    <!-- JavaScript totalmente isolado no final -->
+
+    <script src="script.js"></script>
+</body>
+</html>
